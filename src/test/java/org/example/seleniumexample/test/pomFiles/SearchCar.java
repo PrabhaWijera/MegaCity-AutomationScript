@@ -29,7 +29,7 @@ public class SearchCar {
         String title= driver.getTitle();
         System.out.println(title+"Title of the Application");
     }
-//Toyota Camry
+
 
     @Test(priority = 2)
     public void FilterCars(){
