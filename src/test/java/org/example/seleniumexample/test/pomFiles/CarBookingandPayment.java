@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,7 +17,7 @@ import java.time.Duration;
 public class CarBookingandPayment {
 
     WebDriver driver= new ChromeDriver();
-    WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(50));
 
 
     @BeforeClass
@@ -30,10 +31,32 @@ public class CarBookingandPayment {
     public void getTitleAndNavigateCarPage(){
         String title= driver.getTitle();
         System.out.println(title+"Title of the Application");
-        WebElement searchCar= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Search...']")));
-        searchCar.sendKeys("Toyota Camry");
 
-        WebElement relatedCar= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[normalize-space()='Details']")));
+        WebElement SelectNavLogin= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[normalize-space()='Login']")));
+        SelectNavLogin.click();
+
+
+        WebElement inputName= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='email']")));
+        inputName.sendKeys("samanperera200@gmail.com");
+
+        WebElement inputPassword=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='password']")));
+        inputPassword.sendKeys("samanperera200");
+
+
+        WebElement loginButton=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Login']")));
+        loginButton.click();
+
+
+        WebElement relatedCar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/cars/Toyota Camry']")));
+
+        // Use Actions class to move to the element and click it
+        Actions actions = new Actions(driver);
+        actions.moveToElement(relatedCar).perform(); // Move to the element
+
+        // Wait a bit to ensure it's fully loaded/visible
+        wait.until(ExpectedConditions.elementToBeClickable(relatedCar));
+
+        // Now click the element
         relatedCar.click();
 
     }
@@ -59,8 +82,13 @@ public class CarBookingandPayment {
         String totalAmount = totalAmountElement.getAttribute("value"); // Use getText() if it's not an input field
         System.out.println("Total Amount: " + totalAmount);
 
-        WebElement bookSubmit= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Submit Booking']")));
-        bookSubmit.click();
+        WebElement Submit= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Submit Booking']")));
+
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(Submit).perform(); // Move to the element
+        wait.until(ExpectedConditions.elementToBeClickable(Submit));
+        Submit.click();
 
 
     }
@@ -90,10 +118,14 @@ public class CarBookingandPayment {
 
         // Click the "Make Payment" button
         WebElement makePaymentButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Make Payment']")));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(makePaymentButton).perform(); // Move to the element
+        wait.until(ExpectedConditions.elementToBeClickable(makePaymentButton));
         makePaymentButton.click();
 
         System.out.println("Payment process completed successfully.");
     }
+
 
 
 
