@@ -41,18 +41,18 @@ public class Register {
 
 
         WebElement inputUserName= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username']")));
-        inputUserName.sendKeys("testUsers1001");
+        inputUserName.sendKeys("samanperera200");
 
         WebElement inputEmail=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='email']")));
-        inputEmail.sendKeys("testUsers1001@gmail.com");
+        inputEmail.sendKeys("samanperera200@gmail.com");
 
 
         WebElement inputPassword=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Password']")));
-        inputPassword.sendKeys("testUsers1001123");
+        inputPassword.sendKeys("samanperera200");
 
 
         WebElement inputPhoneNumber=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Phone']")));
-        inputPhoneNumber.sendKeys("0754809028");
+        inputPhoneNumber.sendKeys("0770531993");
 
         WebElement  ClickRegisterBtn= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Register']")));
         ClickRegisterBtn.click();
