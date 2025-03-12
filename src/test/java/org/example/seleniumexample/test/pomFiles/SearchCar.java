@@ -1,9 +1,11 @@
 package org.example.seleniumexample.test.pomFiles;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -37,12 +39,25 @@ public class SearchCar {
         WebElement searchCar= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Search...']")));
         searchCar.sendKeys("Toyota Camry");
 
-        WebElement relatedCar= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[normalize-space()='Details']")));
-        relatedCar.click();
 
     }
 
 
+
+    @Test(priority = 3)
+    public void ClickSelectedCar() {
+        WebElement relatedCar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/cars/Toyota Camry']")));
+
+        // Use Actions class to move to the element and click it
+        Actions actions = new Actions(driver);
+        actions.moveToElement(relatedCar).perform(); // Move to the element
+
+        // Wait a bit to ensure it's fully loaded/visible
+        wait.until(ExpectedConditions.elementToBeClickable(relatedCar));
+
+        // Now click the element
+        relatedCar.click();
+    }
 
 
 }
