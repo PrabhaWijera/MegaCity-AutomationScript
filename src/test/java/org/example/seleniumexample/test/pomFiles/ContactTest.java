@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -33,7 +34,7 @@ public class ContactTest {
     }
 
     @Test(priority = 2)
-    public void LoginFunction(){
+    public void ContactFormFunction(){
 
         WebElement inputYourName= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Your Name']")));
         inputYourName.sendKeys("Testing Name");
@@ -46,6 +47,11 @@ public class ContactTest {
 
 
         WebElement contactButton=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Send Message']")));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(contactButton).perform(); // Move to the element
+        wait.until(ExpectedConditions.elementToBeClickable(contactButton));
+
+
         contactButton.click();
 
     }
