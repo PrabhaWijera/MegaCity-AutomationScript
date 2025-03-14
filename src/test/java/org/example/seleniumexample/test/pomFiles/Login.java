@@ -48,13 +48,7 @@ public class Login {
         WebElement loginButton=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Login']")));
         loginButton.click();
 
-//        WebElement dash=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dash']")));
-//
-//        if(dash.isDisplayed()){
-//            System.out.println("Login Successful");
-//        }else{
-//            System.out.println("Login Failed");
-//        }
+
 
     }
 
